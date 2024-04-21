@@ -1,0 +1,11 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: "deny-privileged-container-policy-binding.example.com"
+spec:
+  policyName: "deny-privileged-container-policy.example.com"  # 適用するValidatingAdmissionPolicyを指定
+  validationActions: [Deny]
+  matchResources:
+    namespaceSelector:  # ValidatingAdmissionPolicyを適用するNamespaceを指定
+      matchLabels:
+        kubernetes.io/metadata.name: ns-vap

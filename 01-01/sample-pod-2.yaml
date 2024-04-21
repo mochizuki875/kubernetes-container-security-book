@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-pod-2
+  namespace: sample-namespace
+  labels:
+    app: sample
+spec:
+  containers:
+  - name: sample-container
+    image: <Docker ID>/sample-web:intro

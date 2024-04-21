@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress-mysql
+  labels:
+    app: mysql
+  namespace: sample-ns
+spec:
+  selector:
+    app: mysql
+  ports:
+  - port: 3306
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wordpress-mysql
+  labels:
+    app: mysql
+  namespace: sample-ns
+spec:
+  containers:
+  - name: mysql
+    image: mysql:8.2.0
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: password
+    - name: MYSQL_USER
+      value: wordpress
+    - name: MYSQL_PASSWORD
+      value: password
+    - name: MYSQL_DATABASE
+      value: wordpress
+    ports:
+    - containerPort: 3306
+      name: mysql

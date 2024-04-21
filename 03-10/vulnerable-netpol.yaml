@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: vulnerable-netpol
+  namespace: sample-ns  # NetworkPolicyを作成するNamespaceとしてsample-nsを指定
+spec:
+  podSelector:  # Vulnerable Podに付与されたラベルを指定
+    matchLabels:
+      app: vulnerable
+  policyTypes:  # 制限を行う通信の種類としてIngressとEgressを指定
+  - Ingress
+  - Egress
+  ingress:  # Ingress通信に関する許可ルールを定義
+  - ports:  # 80番ポート（TCP）への通信を許可
+    - protocol: TCP
+      port: 80
+  # Egress通信に関する許可ルールを定義しないことで全てのEgress通信を禁止

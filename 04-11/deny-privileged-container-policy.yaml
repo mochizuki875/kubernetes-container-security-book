@@ -1,0 +1,16 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: "deny-privileged-container-policy.example.com"
+spec:
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+    - apiGroups:   [""]
+      apiVersions: ["v1"]
+      operations:  ["CREATE", "UPDATE"]
+      resources:   ["pods"]
+  validations:  # Validationのポリシーを定義（Podに含まれるコンテナにprivileged: trueという設定が含まれていないことを検査）
+  - expression: "object.spec.containers.all(container, !(has(container.securityContext)) || !(has(container.securityContext.privileged)) || container.securityContext.privileged != true)"
+    message: "Privileged container is not allowed."
+    reason: Forbidden

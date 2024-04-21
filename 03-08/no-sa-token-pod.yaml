@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: no-sa-token-pod
+  labels:
+    app: no-sa-token-pod
+spec:
+  containers:
+  - image: ubuntu:22.04
+    name: ubuntu
+    command: ["/bin/sh", "-c", "while :; do sleep 10; done"]
+  automountServiceAccountToken: false

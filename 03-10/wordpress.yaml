@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress
+  labels:
+    app: wordpress
+  namespace: sample-ns
+spec:
+  type: LoadBalancer
+  selector:
+    app: wordpress
+  ports:
+  - port: 80
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wordpress
+  labels:
+    app: wordpress
+  namespace: sample-ns
+spec:
+  containers:
+  - name: wordpress
+    image: wordpress:6.4.1
+    env:
+    - name: WORDPRESS_DB_HOST  # 接続先DBのホスト名を指定（MySQL Podに紐付くServiceを指定）
+      value: wordpress-mysql
+    - name: WORDPRESS_DB_USER  # 接続先DBのユーザー名を指定
+      value: wordpress
+    - name: WORDPRESS_DB_PASSWORD  # 接続先DBのユーザー名に対応するパスワードを指定
+      value: password
+    ports:
+    - containerPort: 80
+      name: wordpress

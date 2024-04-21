@@ -1,0 +1,11 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all-ingress-and-egress
+  namespace: sample-ns  # NetworkPolicyを作成するNamespaceとしてsample-nsを指定
+spec:
+  podSelector: {}  # Namespaceに含まれる全てのPodを指定 
+  policyTypes:  # 制限を行う通信の種類としてIngress/Egressを指定
+  - Ingress
+  - Egress
+  # Ingress/Egress通信に関する許可ルールを定義しないことで全てのIngress/Egress通信を禁止

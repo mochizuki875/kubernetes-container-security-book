@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: sample-limit-range
+  namespace: limit-range-test # 対象とするNamespace
+spec:
+  limits:
+  - type: Container
+    default:
+      cpu: 500m # limits.cpuのデフォルト値
+      memory: 512Mi # limits.memoryのデフォルト値
+    defaultRequest:
+      cpu: 250m  # requests.cpuのデフォルト値
+      memory: 256Mi # requests.memoryのデフォルト値
+    max:
+      cpu: 1000m # cpuとして指定可能な最大値
+      memory: 1Gi # memoryとして指定可能な最大値
+    min:
+      cpu: 100m  # cpuとして指定可能な最小値
+      memory: 128Mi  # memoryとして指定可能な最小値

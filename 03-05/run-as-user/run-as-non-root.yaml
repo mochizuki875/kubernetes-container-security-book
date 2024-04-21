@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: run-as-non-root
+  labels:
+    app: run-as-non-root
+spec:
+  containers:
+  - name: run-as-non-root
+    image: ubuntu:22.04
+    command: ["/bin/sh", "-c", "while :; do sleep 10; done"]
+  securityContext:
+    runAsNonRoot: true

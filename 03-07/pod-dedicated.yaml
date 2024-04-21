@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-dedicated
+  labels:
+    app: pod-dedicated
+spec:
+  containers:
+  - image: nginx1.25.5
+    name: pod-dedicated
+  tolerations:
+  - key: "dedicated"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"
+  nodeSelector:
+    node-restriction.kubernetes.io/dedicated: "true"

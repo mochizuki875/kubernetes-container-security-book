@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: read-only-rootfs-httpd-emptydir
+  labels:
+    app: read-only-rootfs-httpd-emptydir
+spec:
+  containers:
+  - name: httpd
+    image: httpd:2.4.57
+    securityContext:
+      readOnlyRootFilesystem: true
+    volumeMounts:
+    - name: logs
+      mountPath: /usr/local/apache2/logs
+  volumes:
+  - name: logs
+    emptyDir: {}

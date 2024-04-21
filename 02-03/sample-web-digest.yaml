@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-web
+  labels:
+    app: sample-web
+spec:
+  containers:
+  - name: web
+    image: <Docker ID>/sample-web@<ダイジェスト値>
+    imagePullPolicy: Always

@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-web-b
+  labels:
+    app: sample-web-b
+spec:
+  containers:
+  - name: sample-web-b
+    image: <Docker ID>/sample-web:case7
+    env:
+    - name: APP_NAME
+      value: "Sample Web B"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-web-b
+  labels:
+    app: sample-web-b
+spec:
+  selector:
+    app: sample-web-b
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080

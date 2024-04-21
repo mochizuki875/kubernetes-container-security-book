@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: seccomp-runtime-default
+  labels:
+    app: seccomp-runtime-default
+spec:
+  containers:
+  - name: seccomp-runtime-default
+    image: ubuntu:22.04
+    command: ["/bin/sh", "-c", "while :; do sleep 10; done"]
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault

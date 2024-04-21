@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vulnerable-pod
+  labels:
+    app: vulnerable
+  namespace: sample-ns
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu:22.04
+    command: ["/bin/sh", "-c", "while :; do sleep 10; done"]

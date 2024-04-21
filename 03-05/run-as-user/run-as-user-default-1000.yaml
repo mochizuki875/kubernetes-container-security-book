@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: run-as-user-default-1000
+  labels:
+    app: run-as-user-default-1000
+spec:
+  containers:
+  - name: run-as-user-default-1000
+    image: <Docker ID>/ubuntu-user-1000:22.04
+    command: ["/bin/sh", "-c", "while :; do echo run-as-user-default-1000;sleep 10; done"]

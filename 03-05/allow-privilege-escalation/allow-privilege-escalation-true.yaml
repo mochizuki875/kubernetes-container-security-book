@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: allow-privilege-escalation-true
+  labels:
+    app: allow-privilege-escalation-true
+spec:
+  containers:
+  - name: allow-privilege-escalation-true
+    image: <Docker ID>/ubuntu-user-1000:22.04-sudo
+    command: ["/bin/sh", "-c", "while :; do sleep 10; done"]
+    securityContext:
+      runAsUser: 1000
+      runAsGroup: 1000

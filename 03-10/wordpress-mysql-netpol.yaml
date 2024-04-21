@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: wordpress-mysql-netpol
+  namespace: sample-ns  # NetworkPolicyを作成するNamespaceとしてsample-nsを指定
+spec:
+  podSelector:  # MySQL Podに付与されたラベルを指定
+    matchLabels:
+      app: mysql
+  policyTypes:  # 制限を行う通信の種類としてIngressとEgressを指定
+  - Ingress
+  - Egress
+  ingress:  # Ingress通信に関する許可ルールを定義
+  - from:  # WordPress Podからの通信を許可するためのルールを定義
+    - podSelector: # WordPress Podに付与されたラベルを指定
+        matchLabels:
+          app: wordpress
+    ports:  # 3306番ポート（TCP）への通信を許可
+    - protocol: TCP
+      port: 3306
+  # Egress通信に関する許可ルールを定義しないことで全てのEgress通信を禁止

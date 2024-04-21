@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: run-as-user-1000-hello-ok
+  labels:
+    app: run-as-user-1000-hello-ok
+spec:
+  containers:
+  - name: run-as-user-1000-hello-ok
+    image: <Docker ID>/ubuntu-user-1000:22.04
+    command: ["/bin/sh", "-c", "while :; do echo hello >> hello.txt;sleep 10; done"]
+    securityContext:
+      runAsUser: 1000
+      runAsGroup: 1000

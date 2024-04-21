@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-web-go-standard
+  labels:
+    app: sample-web-go
+spec:
+  containers:
+  - name: web
+    image: <Docker ID>/sample-web:go-standard

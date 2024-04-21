@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath
+  labels:
+    app: hostpath
+spec:
+  containers:
+  - name: hostpath
+    image: ubuntu:22.04
+    command: ["/bin/sh", "-c", "while :; do sleep 10; done"]
+    volumeMounts:
+    - mountPath: /host-etc
+      name: hostpath-etc
+  volumes:
+  - name: hostpath-etc
+    hostPath:
+      path: /etc

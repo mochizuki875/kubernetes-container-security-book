@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: run-as-root-hello
+  labels:
+    app: run-as-root-hello
+spec:
+  containers:
+  - name: run-as-root-hello
+    image: ubuntu:22.04
+    command: ["/bin/sh", "-c", "while :; do echo hello >> hello.txt;sleep 10; done"]

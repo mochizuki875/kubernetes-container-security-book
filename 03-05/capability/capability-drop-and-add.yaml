@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: capability-drop-and-add
+  labels:
+    app: capability-drop-and-add
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu:22.04
+    command: ["/bin/sh", "-c", "while :; do sleep 10; done"]
+    securityContext:
+      capabilities:
+        drop:
+        - all
+        add:
+        - CHOWN
+        - DAC_OVERRIDE
+        - FOWNER
+        - SETGID
+        - SETUID
+        - NET_BIND_SERVICE
